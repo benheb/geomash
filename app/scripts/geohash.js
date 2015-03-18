@@ -49,7 +49,7 @@ Geohash.base32 = '0123456789bcdefghjkmnpqrstuvwxyz';
 
 $.ajax({
   dataType: "json",
-  url: "/data/geohash.out.json",
+  url: "data/geohash.out.json",
   success: function(data) {
     console.log('data', data);
     window.data = data;

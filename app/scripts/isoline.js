@@ -36,7 +36,7 @@ function styler(feature) {
 
 $.ajax({
   dataType: "json",
-  url: "/data/intensity.json",
+  url: "data/intensity.json",
   success: function(data) {
     console.log('data', data);
     L.geoJson(data, {

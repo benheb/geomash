@@ -39,7 +39,7 @@ $.ajax({
   dataType: "json",
   //url: "/data/intensity.json",
   //url: "/data/count.json",
-  url: "/data/count-large.json",
+  url: "data/count-large.json",
   success: function(data) {
     console.log('data', data);
     L.geoJson(data, {
