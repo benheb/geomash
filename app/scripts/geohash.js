@@ -6,12 +6,6 @@ var map = L.map('map').setView([25.528, -35.680],3);
 
 L.esri.basemapLayer("Gray").addTo(map);
 
-//var parks = new L.esri.FeatureLayer("http://maps.ngdc.noaa.gov/arcgis/rest/services/web_mercator/crowdmag/MapServer/0", {
-// style: function () {
-//    return { color: "#70ca49", weight: 2 };
-//  }
-//}).addTo(map);
-
 function getRadius(d) {
   return d > 500 ? 20 :
          d > 300  ? 14 :
@@ -46,7 +40,7 @@ var Geohash = {};
 /* (Geohash-specific) Base32 map */
 Geohash.base32 = '0123456789bcdefghjkmnpqrstuvwxyz';
 
-
+//get geohash data
 $.ajax({
   dataType: "json",
   url: "data/geohash.out.json",
@@ -59,15 +53,23 @@ $.ajax({
   }
 }).error(function() {});
 
-
+//update map on zoom
 map.on('zoomend', function() {
-  var precision = getPrecision(map.getZoom());
-  var hash = getHash(window.data, precision);
-  addPoints(hash);
+  var zoom = map.getZoom();
+  console.log('zoom!', zoom);
+  if ( zoom < 9 ) {
+    var precision = getPrecision(zoom);
+    var hash = getHash(window.data, precision);
+    addPoints(hash);
+  } else {
+    if ( !window.fLayer ) {
+      addFeatureLayer();
+    }
+  }
 });
 
+//calculate subhash
 function getHash(data, precision) {
-  console.log('update hash... ', precision);
   var newHash = {};
   for ( var key in data ) {
     var sub = key.substring(0, precision);
@@ -82,20 +84,23 @@ function getHash(data, precision) {
 function getPrecision(zoom) {
   var precision;
   switch(true) {
-    case (zoom>13):
+    case (zoom>8):
         precision = 9;
         break;
-    case (zoom>10):
+    case (zoom>7):
         precision = 7;
+        break;
+    case (zoom>6):
+        precision = 6;
         break;
     case (zoom>5):
         precision = 5;
         break;
-    case (zoom>3):
-        precision = 3;
+    case (zoom>4):
+        precision = 4;
         break;
-    case (zoom>1):
-        precision = 2;
+    case (zoom>2):
+        precision = 3;
         break;
     default:
         precision = 1;
@@ -107,6 +112,10 @@ function getPrecision(zoom) {
 function addPoints(data) {
 
   if ( window.layer ) map.removeLayer(window.layer);
+  if ( window.fLayer ) {
+    map.removeLayer(window.fLayer);
+    window.fLayer = null;
+  }
 
   var features = [];
 
@@ -139,7 +148,29 @@ function addPoints(data) {
   window.layer.addTo(map);
 }
 
-//GEOHASH 
+
+function addFeatureLayer() {
+
+  if ( window.layer ) map.removeLayer(window.layer);
+
+  window.fLayer = new L.esri.FeatureLayer("http://maps.ngdc.noaa.gov/arcgis/rest/services/web_mercator/crowdmag/MapServer/0", {
+    style: function () {
+      return { color: "#70ca49", weight: 2 };
+    }
+  }).addTo(map);
+
+  var popupTemplate = "<h5>Intensity</h5> {INTENSITY}<br>";
+
+  window.fLayer.bindPopup(function(feature){
+    return L.Util.template(popupTemplate, feature.properties)
+  });
+}
+
+
+
+/*
+******GEOHASH *****
+*/
 Geohash.decode = function(geohash) {
 
     var bounds = Geohash.bounds(geohash); // <-- the hard work
