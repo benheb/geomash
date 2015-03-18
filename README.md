@@ -1,2 +1,0 @@
-# geomash
-Big data hacking
