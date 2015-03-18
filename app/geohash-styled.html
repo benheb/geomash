@@ -1,0 +1,138 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>crowdmag</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="map"></div>
+
+    <div id="stats">
+      <div class="container">
+        <h4 style="margin-bottom:-10px">Geohash Styled Clusters</h4>
+        <hr />
+        <div class="col-md-6 col-sm-6">
+          <div><span class="stat-name">Number of features: </span><b>62,000</b></div>
+          <div><span class="stat-name">GeoJSON File size: </span><b>16.0M</b></div>
+          <div><span class="stat-name">Geohash File size: </span><b>39.8K</b></div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="col-md-12">
+            <div style="font-size:0.8em"><b>Average Intensity</b></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#FFEDA0"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#FED976"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#FEB24C"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#FD8D3C"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#FC4E2A"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#E31A1C"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#BD0026"></div>
+            <div class="col-md-1 legend-item style-legend" style="background:#800026"></div>
+          </div>
+          <div class="col-md-12">
+            <div class="col-md-1 legend-item style-key"><200</div>
+            <div class="col-md-1 legend-item style-key">200</div>
+            <div class="col-md-1 legend-item style-key">500</div>
+            <div class="col-md-1 legend-item style-key">1,000</div>
+            <div class="col-md-1 legend-item style-key">2,000</div>
+            <div class="col-md-1 legend-item style-key">5,000</div>
+            <div class="col-md-1 legend-item style-key">20,000</div>
+            <div class="col-md-1 legend-item style-key">30,000</div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div style="font-size:0.8em"><b>Cluster Count</b></div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:100%; height:100%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:90%; height:90%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:80%; height:80%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:70%; height:70%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:60%; height:60%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:50%; height:50%"></div>
+            </div>
+            <div class="col-md-1 legend-item count-legend" style="width:10.333333%">
+              <div class="circle" style="width:40%; height:40%"></div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="col-md-1 legend-item count-key"><10</div>
+            <div class="col-md-1 legend-item count-key">10</div>
+            <div class="col-md-1 legend-item count-key">20</div>
+            <div class="col-md-1 legend-item count-key">50</div>
+            <div class="col-md-1 legend-item count-key">100</div>
+            <div class="col-md-1 legend-item count-key">300</div>
+            <div class="col-md-1 legend-item count-key">500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.5/esri-leaflet.js"></script>
+        <script src="scripts/geohash-styled.js"></script>
+        
+</body>
+</html>

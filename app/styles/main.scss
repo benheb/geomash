@@ -23,7 +23,39 @@ html, body {
 }
 
 #map {
-  height:75%;
+  height:73%;
+}
+
+.legend-item {
+  float:left;
+  margin:2px;
+  padding:0px;
+  padding-right:30px;
+}
+
+.style-legend {
+  height:5px;
+}
+
+.count-legend {
+  height:100%;
+  position: relative;
+  padding:0px;  
+  height:28px;
+}
+
+.count-legend .circle {
+  border: 1px solid #CCC;
+  border-radius: 100px;
+
+}
+
+.count-key {
+  font-size:0.6em;
+}
+
+.style-key {
+  font-size:0.6em;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
