@@ -83,6 +83,7 @@ function getHash(data, precision) {
 
 function getPrecision(zoom) {
   var precision;
+  console.log('zoom', zoom);
   switch(true) {
     case (zoom>8):
         precision = 9;
@@ -103,7 +104,7 @@ function getPrecision(zoom) {
         precision = 3;
         break;
     case (zoom>2):
-        precision = 2;
+        precision = 3;
         break;
     default:
         precision = 1;
