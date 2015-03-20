@@ -1,7 +1,7 @@
 var geohash = require('ngeohash');
 var fs = require('fs');
  
-var data = JSON.parse(fs.readFileSync('input.json').toString());
+var data = JSON.parse(fs.readFileSync('input-lg.json').toString());
 var grid = {};
  
 data.features.forEach(function(f,i){
@@ -18,4 +18,4 @@ data.features.forEach(function(f,i){
 });
  
 console.log(Object.keys(grid).length);
-fs.writeFileSync('geohash-attrs.out.json', JSON.stringify(grid));
+fs.writeFileSync('geohash-400.out.json', JSON.stringify(grid));
