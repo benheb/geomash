@@ -7,6 +7,9 @@ var fs = require('fs');
 var precisions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 var stats = {};
 var count, grid;
+
+//should start at max precision based of size of input 
+//usually 9, but in case of 1 million, had to start at 6
 var prec = 6;
 
 var parser = stream.parse('features.*');
@@ -27,12 +30,12 @@ process.stdin
   .pipe(parser)
   .pipe(es.mapSync(function (f) {
     //console.log('f', f);  
+    //TODO handle both points and polygons here!
     var pts = ( f.geometry.coordinates[0] ) ? f.geometry.coordinates[0] : f.geometry.coordinates;
     var pt = getPolyCenter(pts);
     //console.log('pt', pt);
 
     var ghash = geohash.encode(pt[1], pt[0], prec);
-    //console.log('f.prop', f.properties);
     if (!grid[ghash]){
       grid[ghash] = {
         count: 0
@@ -40,11 +43,20 @@ process.stdin
     }
     grid[ghash].count++;
     count++;
+
+    //call presitionStats
+
     return f
   }));
  
 function precisionStats(hash) {
+  //var sub = hash.substring(0, precision);
   
+  //gen stats for each precistion 9 -> 1
+
+  //if (hash.length === 1) return; 
+  //else, run again
+  precisionStats(hash);
 }
 
 function getPolyCenter(pts){
@@ -65,29 +77,3 @@ function getPolyCenter(pts){
   f=twicearea*3;
   return [x/f,y/f];
 }
-
-/*
-var data = JSON.parse(fs.readFileSync('parcels.json').toString());
-
-precisions.forEach(function(prec) {
-  grid = {};
-  count = 0;
-  data.features.forEach(function(f,i){
-    var pts = ( f.geometry.coordinates[0] ) ? f.geometry.coordinates[0] : f.geometry.coordinates;
-    var pt = getPolyCenter(pts);
-    //console.log('pt', pt);
-    var ghash = geohash.encode(pt[1], pt[0], prec);
-    //console.log('f.prop', f.properties);
-    if (!grid[ghash]){
-      grid[ghash] = {
-        count: 0
-      };
-    }
-    grid[ghash].count++;
-    count++;
-  });
-  stats[prec] = {};
-  stats[prec].count = Object.keys(grid).length;
-});
-
-*/
